@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import time
 
@@ -414,7 +415,14 @@ if st.button("Run evaluation", type="primary"):
                         "match": item["match"],
                     })
 
-            except Exception:
+            except Exception as exc:
+
+                # Show only the exception class to users. Provider error
+                # messages can contain credentials or document content.
+                logging.error(
+                    "Model extraction failed for %s on %s: %s",
+                    model_id, uploaded.name, type(exc).__name__
+                )
 
                 elapsed = (
                     time.perf_counter() - start
@@ -430,12 +438,7 @@ if st.button("Run evaluation", type="primary"):
                         elapsed,
                         2
                     ),
-                    "error": (
-                        "Model execution failed. "
-                        "Check API credentials, "
-                        "model availability, "
-                        "and server logs."
-                    ),
+                    "error": f"Model execution failed: {type(exc).__name__}",
                     "raw_json": "",
                 })
 
