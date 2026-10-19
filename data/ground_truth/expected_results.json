@@ -1,12 +1,13 @@
-[
-  {
-    "document_id": "schedule_001",
-    "physician": "Dr. John Smith",
-    "employee_id": "DOC1001",
-    "facility": "Central Hospital",
-    "schedule_date": "2026-10-20",
-    "start_time": "08:00",
-    "end_time": "17:00",
-    "department": "Cardiology"
-  }
-]
+{
+  "documents": [
+    {
+      "document_id": "SCH-001",
+      "filename": "01_physician_schedule_clean.pdf",
+      "document_type": "physician_schedule",
+      "fields": {
+        "physician": "Dr. Maya Chen",
+        "schedule_date": "2026-11-02"
+      }
+    }
+  ]
+}
