@@ -14,11 +14,11 @@ from src.model_client import run_extraction
  #App Configuration
 
 st.set_page_config(
-    page_title="Healthcare LLM/OCR Evaluation (POC)",
+    page_title="Model Evaluation Framework(POC)",
     layout="wide"
 )
 
-st.title("Healthcare LLM/OCR Evaluation (POC)")
+st.title("Model Evaluation Framework (POC)")
 
 st.caption(
     "Sample Model Testing Platform"
