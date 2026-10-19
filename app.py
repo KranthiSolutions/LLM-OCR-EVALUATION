@@ -11,9 +11,7 @@ from src.evaluation import compare_values, flatten_json
 from src.model_client import run_extraction
 
 
-# ==========================================================
-# 1. APPLICATION CONFIGURATION
-# ==========================================================
+ #App Configuration
 
 st.set_page_config(
     page_title="Healthcare LLM/OCR Evaluation (POC)",
@@ -23,16 +21,11 @@ st.set_page_config(
 st.title("Healthcare LLM/OCR Evaluation (POC)")
 
 st.caption(
-    "Synthetic-data evaluation starter. "
-    "Do not upload PHI unless your organization has approved "
-    "the complete workflow."
+    "Sample Model Testing Platform"
+
 )
 
-
-# ==========================================================
 # 2. SECURE API KEY CONFIGURATION
-# ==========================================================
-
 # Load local .env file if available.
 load_dotenv(override=False)
 
@@ -70,10 +63,7 @@ if GEMINI_API_KEY:
     os.environ["GEMINI_API_KEY"] = GEMINI_API_KEY
 
 
-# ==========================================================
-# 3. AVAILABLE MODELS
-# ==========================================================
-
+# MODELS
 DEFAULT_MODELS = [
     "gemini/gemini-3.8-flash",
     "openai/gpt-4.1-mini",
@@ -83,14 +73,8 @@ DEFAULT_MODELS = [
 ]
 
 
-# ==========================================================
-# 4. SIDEBAR CONFIGURATION
-# ==========================================================
-
 with st.sidebar:
-
     st.header("Evaluation settings")
-
     model_ids_text = st.text_area(
         "Model IDs (one per line)",
         value="\n".join(DEFAULT_MODELS),
@@ -148,10 +132,8 @@ with st.sidebar:
     )
 
 
-# ==========================================================
-# 5. DOCUMENT UPLOAD
-# ==========================================================
 
+# DOCUMENT UPLOAD
 st.subheader("1. Upload documents and ground truth")
 
 col1, col2 = st.columns(2)
@@ -200,9 +182,8 @@ if not selected_models:
     st.stop()
 
 
-# ==========================================================
-# 6. LOAD GROUND TRUTH
-# ==========================================================
+
+# LOAD GROUND TRUTH
 
 try:
 
@@ -224,9 +205,8 @@ except Exception:
     st.stop()
 
 
-# ==========================================================
-# 7. DOCUMENT PREVIEW
-# ==========================================================
+# DOCUMENT PREVIEW
+
 
 st.subheader("2. Review selected test files")
 
@@ -267,10 +247,8 @@ if missing_ground_truth:
     )
 
 
-# ==========================================================
-# 8. RUN EVALUATION
-# ==========================================================
 
+# RUN EVALUATION
 if st.button("Run evaluation", type="primary"):
 
     all_results = []
@@ -494,9 +472,8 @@ if st.button("Run evaluation", type="primary"):
         )
 
 
-# ==========================================================
-# 9. EVALUATION RESULTS
-# ==========================================================
+
+# EVALUATION RESULTS
 
 if "results_df" in st.session_state:
 
@@ -542,9 +519,9 @@ if "results_df" in st.session_state:
     )
 
 
-    # ======================================================
-    # 10. MODEL COMPARISON
-    # ======================================================
+
+    # MODEL COMPARISON
+
 
     if not success_df.empty:
 
@@ -582,9 +559,9 @@ if "results_df" in st.session_state:
         )
 
 
-    # ======================================================
-    # 11. FIELD LEVEL COMPARISON
-    # ======================================================
+
+    # FIELD LEVEL COMPARISON
+   
 
     with st.expander(
         "Field-by-field comparison"
@@ -600,10 +577,8 @@ if "results_df" in st.session_state:
             hide_index=True
         )
 
+    # DOWNLOAD RESULTS
 
-    # ======================================================
-    # 12. DOWNLOAD RESULTS
-    # ======================================================
 
     st.download_button(
         "Download results CSV",
@@ -632,9 +607,8 @@ if "results_df" in st.session_state:
     )
 
 
-# ==========================================================
-# 13. FOOTER
-# ==========================================================
+
+# FOOTER
 
 st.caption(
     "Scores are exact-match scores after basic "
