@@ -12,7 +12,7 @@ response = completion(
             "content": "Are you working?"
         }
     ],
-    api_key=os.getenv("GEMINI_API_KEY")
+  #  api_key=os.getenv("GEMINI_API_KEY")
 )
 
 print(response.choices[0].message.content)
